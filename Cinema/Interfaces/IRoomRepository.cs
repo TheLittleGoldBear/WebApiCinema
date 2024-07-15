@@ -10,6 +10,7 @@ namespace Cinema.Interfaces
         bool CreateRoom(Room room);
         bool UpdateRoom(Room room);
         bool DeleteRoom(Room room);
+        bool AddFilmRoomForRoom(Room room, FilmRoom filmRoom);
         bool Saved();
     }
 }

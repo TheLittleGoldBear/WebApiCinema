@@ -11,7 +11,6 @@ namespace Cinema
         {
             if (!_context.FilmRooms.Any())
             {
-                // Directors
                 var directors = new List<Director>
                 {
                     new Director { FullName = "Steven Spielberg" },
@@ -22,7 +21,6 @@ namespace Cinema
                 _context.Directors.AddRange(directors);
                 _context.SaveChanges();
 
-                // Films
                 var films = new List<Film>
                 {
                     new Film { Name = "Star Wars", Director = directors[0] },
@@ -33,7 +31,6 @@ namespace Cinema
                 _context.Films.AddRange(films);
                 _context.SaveChanges();
 
-                // Screening Rooms
                 var rooms = new List<Room>
                 {
                     new Room { RoomNumber = 10},
@@ -44,7 +41,6 @@ namespace Cinema
                 _context.Rooms.AddRange(rooms);
                 _context.SaveChanges();
 
-                // Film Screening Rooms
                 var filmRooms = new List<FilmRoom>
                 {
                     new FilmRoom { Film = films[0], Room = rooms[0] },

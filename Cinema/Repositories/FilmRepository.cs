@@ -9,7 +9,6 @@ namespace Cinema.Repositories
     {
         private readonly AppDbContex _contex = contex;
 
-
         public bool FilmExists(int filmId)
         {
             return _contex.Films.Any(x => x.Id == filmId);
@@ -49,6 +48,22 @@ namespace Cinema.Repositories
         public bool DeleteFilm(Film film)
         {
             _contex.Films.Remove(film);
+            return Saved();
+        }
+        public bool AddFilmRoomForFilm(Film film, FilmRoom filmRoom)
+        {
+            if(film == null || filmRoom == null)
+            {
+                return false;
+            }
+
+            if(film.FilmRooms == null)
+            {
+                film.FilmRooms = new();
+            }
+
+            film.FilmRooms.Add(filmRoom);
+
             return Saved();
         }
 

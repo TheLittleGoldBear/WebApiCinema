@@ -22,28 +22,20 @@ namespace Cinema.Repositories
         {
             return _contex.Directors.ToList();
         }
-        
+
         public bool CreateDirector(Director director)
         {
             _contex.Directors.Add(director);
             return Saved();
         }
-
-
-        public bool Saved()
-        {
-            var saved = _contex.SaveChanges();
-            return saved > 0;
-        }
-
         public bool AddFilmToDirector(Director director, Film film)
         {
-            if(director == null || film == null)
+            if (director == null || film == null)
             {
                 return false;
             }
 
-            if(director.Films == null)
+            if (director.Films == null)
             {
                 director.Films = new List<Film>();
             }
@@ -52,5 +44,12 @@ namespace Cinema.Repositories
 
             return Saved();
         }
+
+        public bool Saved()
+        {
+            var saved = _contex.SaveChanges();
+            return saved > 0;
+        }
+
     }
 }

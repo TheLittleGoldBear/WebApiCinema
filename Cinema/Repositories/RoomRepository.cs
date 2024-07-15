@@ -40,6 +40,23 @@ namespace Cinema.Repositories
             return Saved();
         }
 
+        public bool AddFilmRoomForRoom(Room room, FilmRoom filmRoom)
+        {
+            if (room == null || filmRoom == null)
+            {
+                return false;
+            }
+
+            if (room.FilmRooms == null)
+            {
+                room.FilmRooms = new();
+            }
+
+            room.FilmRooms.Add(filmRoom);
+
+            return Saved();
+        }
+
         public bool Saved()
         {
             var saved = _contex.SaveChanges();

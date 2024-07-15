@@ -11,6 +11,7 @@ namespace Cinema.Interfaces
         bool CreateFilm(Film film);
         bool UpdateFilm(Film film);
         bool DeleteFilm(Film film);
+        bool AddFilmRoomForFilm(Film film, FilmRoom filmRoom);
         bool Saved();
     }
 }
