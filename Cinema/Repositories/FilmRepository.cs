@@ -20,7 +20,11 @@ namespace Cinema.Repositories
         }
         public ICollection<Film> GetFilms()
         {
-            return _contex.Films.Include(x => x.Director).ToList();
+            return _contex.Films
+                .Include(x => x.Director)
+                .Include(x => x.FilmRooms)
+                .ThenInclude(x => x.Room)
+                .ToList();
         }
 
         public ICollection<Film> GetFilmByDirector(int directorId)
@@ -28,13 +32,13 @@ namespace Cinema.Repositories
             return _contex.Films
                 .Where(x => x.Director.Id == directorId)
                 .Include(x => x.Director)
+                .Include(x => x.FilmRooms)
+                .ThenInclude(x => x.Room)
                 .ToList();
         }
 
         public bool CreateFilm(Film film)
         {
-            //spr czy jest reżyser
-
             _contex.Films.Add(film);
             return Saved();
         }

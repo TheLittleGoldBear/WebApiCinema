@@ -25,7 +25,6 @@ namespace Cinema.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<FilmDto>))]
         public IActionResult GetFilms()
         {
-
             var films = _mapper.Map<List<Film>, List<FilmDto>>(_filmRepository.GetFilms().ToList());
 
             if (!ModelState.IsValid)
@@ -72,7 +71,6 @@ namespace Cinema.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         public IActionResult CrateFilm(
-            [FromQuery] int directorId,
             [FromBody] FilmCreateDto filmDto)
         {
             if (filmDto == null)
@@ -82,9 +80,9 @@ namespace Cinema.Controllers
 
             if (filmDto.RoomIds == null)
 
-                if (!_directorRepository.DirectorExist(directorId))
+                if (!_directorRepository.DirectorExist(filmDto.DirctorId))
                 {
-                    return NotFound(directorId);
+                    return NotFound(filmDto.DirctorId);
                 }
 
             var film = _mapper.Map<Film>(filmDto);
@@ -94,7 +92,7 @@ namespace Cinema.Controllers
                 return BadRequest(ModelState);
             }
 
-            var director = _directorRepository.GetDirector(directorId);
+            var director = _directorRepository.GetDirector(filmDto.DirctorId);
             film.Director = director;
 
             foreach (var roomId in filmDto.RoomIds)

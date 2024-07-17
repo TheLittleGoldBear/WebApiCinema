@@ -18,9 +18,6 @@ namespace Cinema
                     new Director { FullName = "Martin Scorsese" }
                 };
 
-                _context.Directors.AddRange(directors);
-                _context.SaveChanges();
-
                 var films = new List<Film>
                 {
                     new Film { Name = "Star Wars", Director = directors[0] },
@@ -28,18 +25,12 @@ namespace Cinema
                     new Film { Name = "Mullholland Drive", Director = directors[2] }
                 };
 
-                _context.Films.AddRange(films);
-                _context.SaveChanges();
-
                 var rooms = new List<Room>
                 {
                     new Room { RoomNumber = 10},
                     new Room { RoomNumber = 6},
                     new Room { RoomNumber = 4}
                 };
-
-                _context.Rooms.AddRange(rooms);
-                _context.SaveChanges();
 
                 var filmRooms = new List<FilmRoom>
                 {

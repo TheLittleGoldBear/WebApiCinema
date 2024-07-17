@@ -8,10 +8,16 @@ namespace Cinema.Helper
     {
         public MapperProfile()
         {
+            CreateMap<Room, RoomDto>();
+            CreateMap<RoomDto, Room>();
+
             CreateMap<Film, FilmDto>()
                .ForMember(dest => dest.DirectorDto,
                opt => opt.MapFrom(
-                   src => src.Director));
+                   src => src.Director))
+               .ForMember(dest => dest.RoomDtos,
+               opt => opt.MapFrom(
+                   src => src.FilmRooms.Select(x => x.Room)));
 
             CreateMap<FilmCreateDto, Film>();
 
@@ -19,9 +25,6 @@ namespace Cinema.Helper
                 .ForMember(dest => dest.Director,
                 opt => opt.MapFrom(
                     src => src.DirectorDto));
-
-            CreateMap<Room, RoomDto>();
-            CreateMap<RoomDto, Room>();
             
             CreateMap<Director, DirectorDto>();
             CreateMap<DirectorDto, Director>();
